@@ -12,8 +12,8 @@
 * 페이지는 현재까지 총 3개 목록 출력 페이지, 게시물 상세 정보 페이지, 게시물 수정 페이지와 게시물 생성 페이지는 하나의 html 파일로 만듬(파라미터가 넘어오냐 오지않냐에 따라 수정 혹은 생성페이지가 되도록 만듬)
 
 ## 하면서 배운 사실
- ---
-### 기본키 생성전략
+
+### 1.기본키 생성전략
 
 * AUTO-> IDENTIT, SEQUENCE, TABLE중 하나 자동으로 선택, 웬만하면 사용 x
 
@@ -23,7 +23,7 @@
 
 * TABLE-> 키 생성 전용 테이블 하나 만들어서 시퀸스 흉내내는 전략, 잘 사용 x
 
-### Optional
+### 2.Optional
 
 * EntityManager 에서 찾는 값 없으면 null 반환함 그러니까 Optional로 null체크 해야됨
 
@@ -43,7 +43,7 @@ String name = optional.orElse("anonymous");
 
 User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("user doesn't exist");
 
-### 영속성 컨텍스트, merge(), 더티체킹
+### 3.영속성 컨텍스트, merge(), 더티체킹
 
 *  merge()는 준영속 상태 엔티티를 영속상태로 변환해줌, 예시로 html from으로 받아온 객체로 수정하고 싶을때 merge()로 영속 상태로 만들면 수정이 된다
   
@@ -51,7 +51,7 @@ User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentExc
   
 * jpa에서는 트랜잭션(@Transactional) 끝난 시점에 처음상태인 스냅샷과 현 시점의 상태 비교해서 쿼리 날림(영속성 컨텍스트가 관리해야됨)
 
-### 엔티티에  날짜 저장하기
+### 4.엔티티에  날짜 저장하기
 
 * 엔티티 내부에 @Prepersist한 메소드는 엔티티 생성될때 작동
   
@@ -59,11 +59,11 @@ User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentExc
   
 * 이걸로 날짜 구현 가능
 
-### 프론트와 데이터 주고받을 때 주의사항
+### 5.프론트와 데이터 주고받을 때 주의사항
 
 *  html form통해 프론트에서 정보받는건 html body에서 쿼리형태로 받는거니까 @ModelAttribute사용(착각해서 @RequestBody를 사용했었다)
 
-# 정리
+## 정리
 
 * Optional과 영속상태에 대한 개념 더티체킹 그리고 생성날짜를 어떻게 db에 저장할지 알게됨
 
