@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tgg.blog.dto.RequestPost;
 import tgg.blog.entity.Post;
 import tgg.blog.repository.PostRepository;
 
@@ -26,6 +27,12 @@ public class PostService {
 
     public List<Post> findAllPost(){
         return postRepository.findAll();
+    }
+
+    @Transactional
+    public void updatePost(RequestPost requestPost){
+        Post post = findById(requestPost.getId());
+        post.update(requestPost.getTitle(),requestPost.getContent());
     }
 
     @Transactional

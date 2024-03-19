@@ -38,4 +38,9 @@ public class Post {
         LocalDateTime now = LocalDateTime.now();
         updatedDate = now;
     }
+
+    public void update(String title,String content){
+        this.title=title;
+        this.content=content;
+    }
 }

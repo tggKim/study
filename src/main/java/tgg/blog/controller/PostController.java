@@ -57,16 +57,13 @@ public class PostController {
     @PostMapping("/blog/post")
     public String addOrUpdate(@ModelAttribute RequestPost requestPost,Model model){
         if(requestPost.getId()==null){
-            Post post = requestPost.toPost();
-            postService.savePost(post);
+            postService.savePost(requestPost.toPost());
             return "redirect:/blog";
         }
         else{
-            System.out.println("not null");
-            Post post = requestPost.toPost();
-            postService.savePost(post);
-            ResponsePost responsePost = new ResponsePost(post);
-            model.addAttribute("post",responsePost);
+            postService.updatePost(requestPost);
+            ResponsePost post = new ResponsePost(postService.findById(requestPost.getId()));
+            model.addAttribute("post",post);
             return "redirect:/blog/post/"+post.getId();
         }
     }
