@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>post</title>
+        <style>
+            html, body {
+                height: 100%;
+            }
+            body{
+                height: 75%;
+            }
+            h1, h3{
+                text-align: center;
+            }
+            input[type="text"] {
+                display: block;
+                margin: 0 auto;
+                width: 350px; /* 필요에 따라 너비 조정 */
+            }
+            textarea{
+                display: block;
+                margin: 0 auto;
+                width: 90%;
+                height: 90%;
+            }
+            div{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Posted</h1>
+        <hr>
+        <h3>제목</h3>
+        <input type="text" th:value="${post.title}" readonly>
+        <h3>내용</h3>
+        <textarea th:text="${post.content}" readonly></textarea>
+        <br>
+        <div>
+            <input type="button" th:onclick="|location.href='@{/blog/post?id={id}(id=${post.id})}'|" value="수정">
+            <input type="button" th:onclick="|location.href='@{/blog}'|" value="취소">
+        </div>
+    </body>
+</html>

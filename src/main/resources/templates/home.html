@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <title>home</title>
+        <style>
+            h3{
+                text-align: center;
+            }
+            a{
+                display: block;
+                text-align: center;
+                text-decoration: none;
+            }
+            table {
+                margin: 0 auto;
+            }
+            th, td {
+                width: 250px;
+                text-align: center;
+            }
+            div{
+               text-align: right;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>Blog Home</h3>
+        <div>
+            <input th:onclick="|location.href='@{/blog/post}'|" type="button" value="글쓰기">
+        </div>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>생성 날짜</th>
+                    <th>최근 수정일</th>
+                </tr>
+            </thead>
+            <tbody th:each="post:${posts}">
+                <tr>
+                    <td><a th:href="@{/blog/post/{id}(id=${post.id})}" th:text="${post.title}"></a></td>
+                    <td><a th:href="@{/blog/post/{id}(id=${post.id})}" th:text="${#temporals.format(post.createdDate, 'yyyy.MM.dd HH:mm')}"></a></td>
+                    <td><a th:href="@{/blog/post/{id}(id=${post.id})}" th:text="${#temporals.format(post.updatedDate, 'yyyy.MM.dd HH:mm')}"></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

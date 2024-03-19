@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>post</title>
+        <style>
+            html, body, form{
+                height: 100%;
+            }
+            body{
+                height: 75%;
+            }
+            h1, h3{
+                text-align: center;
+            }
+            input[type="text"] {
+                display: block;
+                margin: 0 auto;
+                width: 350px; /* 필요에 따라 너비 조정 */
+            }
+            textarea{
+                display: block;
+                margin: 0 auto;
+                width: 90%;
+                height: 90%;
+            }
+            div{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Post</h1>
+        <hr>
+        <form action="/blog/post" method="POST">
+            <input type="text" th:value="${post.id}" name="id" hidden>
+            <h3>제목</h3>
+            <input th:if="${post.id==null}" type="text" placeholder="제목 입력하시오" name="title">
+            <input th:if="${post.id!=null}" type="text" th:value="${post.title}" name="title">
+            <h3>내용</h3>
+            <textarea th:if="${post.id==null}" placeholder="내용 입력하시오" name="content"></textarea>
+            <textarea th:if="${post.id!=null}" th:text="${post.content}" name="content"></textarea>
+            <br>
+            <div>
+                <input th:if="${post.id==null}" type="submit" value="등록">
+                <input th:if="${post.id!=null}" type="submit" value="수정">
+                <input th:if="${post.id==null}" type="button" th:onclick="|location.href='@{/blog}'|" value="취소">
+                <input th:if="${post.id!=null}" type="button" th:onclick="|location.href='@{/blog/post/{id}(id=${post.id})}'|" value="취소">
+            </div>
+        </form>
+    </body>
+</html>
