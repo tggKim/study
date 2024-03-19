@@ -6,6 +6,7 @@
 * application.properties 설정을 통해서 db설정하는 것 까지 해결함, 연결할때 다시 찾아보자
 * 일단 기본 구성은 Post객체에 제목, 내용, 생성일자, 수정일자를 추가할 계획
 
+
 # 2일차
 
 * 기본적인 Post객체를 만들고 이를 바탕으로 게시물 목록출력하고 게시물 조회 ,생성, 수정까지 구현함 아마 내일 삭제를 구현할듯
@@ -68,6 +69,7 @@ User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentExc
 * Optional과 영속상태에 대한 개념 더티체킹 그리고 생성날짜를 어떻게 db에 저장할지 알게됨
 
 * 프론트랑 정보주고받을 땐 dto클래스를 생성해서 주고받는게 좋음(필요한 데이터만 주고받자)
+
 
 # 3일차
 
