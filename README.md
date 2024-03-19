@@ -54,7 +54,9 @@ User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentExc
 ### 엔티티에  날짜 저장하기
 
 * 엔티티 내부에 @Prepersist한 메소드는 엔티티 생성될때 작동
+  
 * 엔티티 내부에 @PreUpdate한 메소드는 엔티티 업데이트 될때 작동
+  
 * 이걸로 날짜 구현 가능
 
 ### 프론트와 데이터 주고받을 때 주의사항
