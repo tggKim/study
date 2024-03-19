@@ -17,6 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+
+    //첫 화면 Post의 목록을 출력
     @GetMapping("/blog")
     public String posts(Model model){
         List<ResponseListPost> posts =postService.findAllPost()
@@ -27,6 +29,7 @@ public class PostController {
         return  "home";
     }
 
+    //Post에 대한 상세 정보
     @GetMapping("/blog/post/{id}")
     public String post(@PathVariable("id") Long id,Model model){
         Post findPost = postService.findById(id);
@@ -35,6 +38,7 @@ public class PostController {
         return  "post";
     }
 
+    //파라미터 id의 여부에 따라 있으면 수정페이지, 없으면 생성페이지
     @GetMapping("/blog/post")
     public String posting(@RequestParam(name="id",required = false) Long id,Model model){
         ResponsePost post;
@@ -49,6 +53,7 @@ public class PostController {
         return  "addOrUpdate";
     }
 
+    //수정이면  id null 아니고, 생성이면 id null
     @PostMapping("/blog/post")
     public String addOrUpdate(@ModelAttribute RequestPost requestPost,Model model){
         if(requestPost.getId()==null){
@@ -57,6 +62,7 @@ public class PostController {
             return "redirect:/blog";
         }
         else{
+            System.out.println("not null");
             Post post = requestPost.toPost();
             postService.savePost(post);
             ResponsePost responsePost = new ResponsePost(post);

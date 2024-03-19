@@ -30,6 +30,7 @@
         </style>
     </head>
     <body>
+        <input type="text" th:value="${post.id}" id="id" style="visibility: hidden;">
         <h1>Posted</h1>
         <hr>
         <h3>제목</h3>
@@ -39,7 +40,23 @@
         <br>
         <div>
             <input type="button" th:onclick="|location.href='@{/blog/post?id={id}(id=${post.id})}'|" value="수정">
+            <input type="button" value="삭제" id="deleteButton">
             <input type="button" th:onclick="|location.href='@{/blog}'|" value="취소">
         </div>
+        <script>
+            var id = document.getElementById("id").value;
+            document.getElementById("deleteButton").addEventListener("click", function() {
+                fetch('/blog/post/'+id, {
+                    method: 'DELETE',
+                })
+                .then(response => {
+                        alert("삭제되었습니다.");
+                        window.location.replace("/blog");
+                })
+                .catch(error => {
+                    alert("삭제 요청 중 오류가 발생했습니다.");
+                });
+            });
+        </script>
     </body>
 </html>

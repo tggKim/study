@@ -33,7 +33,7 @@
         <h1>Post</h1>
         <hr>
         <form action="/blog/post" method="POST">
-            <input type="text" th:value="${post.id}" name="id" hidden>
+            <input type="text" th:value="${post.id}" name="id" style="visibility: hidden;">
             <h3>제목</h3>
             <input th:if="${post.id==null}" type="text" placeholder="제목 입력하시오" name="title">
             <input th:if="${post.id!=null}" type="text" th:value="${post.title}" name="title">

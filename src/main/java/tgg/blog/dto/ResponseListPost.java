@@ -6,6 +6,7 @@ import tgg.blog.entity.Post;
 
 import java.time.LocalDateTime;
 
+//  /blog에서 post를 리스트로 나타낼때 사용하는 dto
 @Getter @Setter
 public class ResponseListPost {
     private Long id;

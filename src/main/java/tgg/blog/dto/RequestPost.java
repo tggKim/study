@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tgg.blog.entity.Post;
 
+// "/blog/post"의 post 요청에 사용 해당 수정이면 id값이 null이 아니고, 생성이면 id값이 null임
 @Getter @Setter
 @NoArgsConstructor
 public class RequestPost {
