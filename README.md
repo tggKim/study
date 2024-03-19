@@ -67,4 +67,18 @@ User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentExc
 
 * Optional과 영속상태에 대한 개념 더티체킹 그리고 생성날짜를 어떻게 db에 저장할지 알게됨
 
-* 프론트랑 정보주고받을 땐 dto클래스를 생성해서 주고받는게 좋음(필요한 데이터만 주고받자) 
+* 프론트랑 정보주고받을 땐 dto클래스를 생성해서 주고받는게 좋음(필요한 데이터만 주고받자)
+
+# 3일차
+
+* delete기능 구현함 조금 애를 먹음
+
+## 하면서 배운 사실
+
+### 1. 자바스크립트 fetch()
+
+* fetch()로 /blog/post/'+id  url롤 delete요청을 보내서 delete처리 하려고 했음 그런데 요청을 보내는걸 브라우저의 url이 바뀐다고 생각해서 /blog/post/'+id가 매핑된 컨트롤러에 리다이렉트 하도록 return "redirect:/blog/post/"+id; 했었음 근데 리다이렉트 되지않아서 생각해보니 fetch()는 해당 url에 요청을 보내고 결과를 받아오는거니까 컨트롤러가 요청을 받고 로직을 처리하지만 브라우저의 url이 변하지 않았으므로 view를 보여주지 않을거라는 생각에 이름
+
+## 정리
+
+* 자바스크립트에서 fetch()하면 해당 url로 요청을 보내는거지 브라우저의 url이 변경되는건 아니다.(이게 맞는 건지 좀 헷갈림 좀 더 찾아봐야됨)
