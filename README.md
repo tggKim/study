@@ -75,7 +75,7 @@ User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentExc
 
 # 3일차
 
-* delete기능 구현함 조금 애를 먹음
+* delete기능 @RestContrroller로 구현함 조금 애를 먹음
 
 ## 하면서 배운 사실
 
@@ -85,4 +85,6 @@ User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentExc
 
 ## 정리
 
-* 자바스크립트에서 fetch()하면 해당 url로 요청을 보내는거지 브라우저의 url이 변경되는건 아니다.(이게 맞는 건지 좀 헷갈림 좀 더 찾아봐야됨)
+*  자바스크립트에서 fetch()하면 해당 url로 요청을 보내는거지 브라우저의 url이 변경되는건 아니다.(이게 맞는 건지 좀 헷갈림 좀 더 찾아봐야됨)
+
+*  delete api 메소드는 그냥 @RestController로 리턴값 void로 만들었음 현재의 나로서는 딱히 보낼 데이터가 있어야되나? 라는 생각이 있음
