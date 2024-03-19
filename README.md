@@ -77,6 +77,12 @@ User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentExc
 
 * delete기능 @RestContrroller로 구현함 조금 애를 먹음
 
+* 리팩토링 함 merge()를 통한 업데이트말고 변경감지를 통해 업데이트 되도록 구현함
+
+* 컨트롤러 계층에서 엔티티 객체 생성하지 않고 dto의 정보를 서비스에 넘겨 처리하도록 바꿈
+
+* Post 내부에 업데이트 하는 메소드 만듬(캡슐화)
+
 ## 하면서 배운 사실
 
 ### 1. 자바스크립트 fetch()
