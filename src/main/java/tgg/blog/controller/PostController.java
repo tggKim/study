@@ -5,10 +5,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import tgg.blog.dto.RequestComment;
 import tgg.blog.dto.RequestPost;
 import tgg.blog.dto.ResponseListPost;
 import tgg.blog.dto.ResponsePost;
+import tgg.blog.entity.Comment;
 import tgg.blog.entity.Post;
+import tgg.blog.service.CommentService;
 import tgg.blog.service.PostService;
 
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+    private final CommentService commentService;
 
     //첫 화면 Post의 목록을 출력
     @GetMapping("/blog")
@@ -35,6 +39,7 @@ public class PostController {
         Post findPost = postService.findById(id);
         ResponsePost post = new ResponsePost(findPost);
         model.addAttribute("post",post);
+        model.addAttribute("comments",findPost.getComments());
         return  "post";
     }
 
@@ -66,6 +71,12 @@ public class PostController {
             model.addAttribute("post",post);
             return "redirect:/blog/post/"+post.getId();
         }
+    }
+
+    @PostMapping("/blog/post/comment/{postId}")
+    public String addComment(@PathVariable("postId") Long id, @ModelAttribute RequestComment requestComment){
+        commentService.saveComment(id,requestComment);
+        return "redirect:/blog/post/"+id;
     }
 
     @PostConstruct

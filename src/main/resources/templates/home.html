@@ -33,6 +33,7 @@
         <table>
             <thead>
                 <tr>
+                    <td>번호</td>
                     <th>제목</th>
                     <th>생성 날짜</th>
                     <th>최근 수정일</th>
@@ -40,6 +41,7 @@
             </thead>
             <tbody th:each="post:${posts}">
                 <tr>
+                    <td><a th:href="@{/blog/post/{id}(id=${post.id})}" th:text="${post.id}"></a></td>
                     <td><a th:href="@{/blog/post/{id}(id=${post.id})}" th:text="${post.title}"></a></td>
                     <td><a th:href="@{/blog/post/{id}(id=${post.id})}" th:text="${#temporals.format(post.createdDate, 'yyyy.MM.dd HH:mm')}"></a></td>
                     <td><a th:href="@{/blog/post/{id}(id=${post.id})}" th:text="${#temporals.format(post.updatedDate, 'yyyy.MM.dd HH:mm')}"></a></td>

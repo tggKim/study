@@ -1,14 +1,12 @@
 package tgg.blog.entity;
 
 import jakarta.persistence.*;
-import lombok.Generated;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -25,6 +23,9 @@ public class Post {
     private LocalDateTime  createdDate;
 
     private LocalDateTime updatedDate;
+
+    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {

@@ -13,7 +13,7 @@
             h1, h3{
                 text-align: center;
             }
-            input[type="text"] {
+            #input1{
                 display: block;
                 margin: 0 auto;
                 width: 350px; /* 필요에 따라 너비 조정 */
@@ -22,9 +22,19 @@
                 display: block;
                 margin: 0 auto;
                 width: 90%;
-                height: 90%;
+                height: 70%;
             }
             div{
+                text-align: center;
+            }
+            form{
+                text-align: center;
+            }
+            table {
+                margin: 0 auto;
+            }
+            th, td {
+                width: 250px;
                 text-align: center;
             }
         </style>
@@ -34,7 +44,7 @@
         <h1>Posted</h1>
         <hr>
         <h3>제목</h3>
-        <input type="text" th:value="${post.title}" readonly>
+        <input type="text" th:value="${post.title}" readonly id="input1">
         <h3>내용</h3>
         <textarea th:text="${post.content}" readonly></textarea>
         <br>
@@ -43,6 +53,26 @@
             <input type="button" value="삭제" id="deleteButton">
             <input type="button" th:onclick="|location.href='@{/blog}'|" value="취소">
         </div>
+        <br>
+        <form th:action="@{/blog/post/comment/{postId}(postId=${post.id})}" method="POST">
+            <input type="text" placeholder="댓글 입력하시오" size="80" name="content">
+            <input type="submit" value="댓글 달기">
+        </form>
+        <br>
+        <table>
+            <thead>
+            <tr>
+                <th>댓글</th>
+                <th>생성 날짜</th>
+            </tr>
+            </thead>
+            <tbody th:each="comment:${comments}">
+            <tr>
+                <td><input type="text" th:value="${comment.content}" size="50"></td>
+                <td><span th:text="${#temporals.format(comment.createdDate, 'yyyy.MM.dd HH:mm')}"></span></td>
+            </tr>
+            </tbody>
+        </table>
         <script>
             var id = document.getElementById("id").value;
             document.getElementById("deleteButton").addEventListener("click", function() {
