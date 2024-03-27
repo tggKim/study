@@ -45,10 +45,4 @@ public class PostService {
         Post post = postRepository.findById(id).orElseThrow(()->new IllegalArgumentException("값이 null 이다"));
         post.updateViewCount();
     }
-
-    @Transactional
-    public void minusViewCount(Long id){
-        Post post = postRepository.findById(id).orElseThrow(()->new IllegalArgumentException("값이 null 이다"));
-        post.minusViewCount();
-    }
 }
