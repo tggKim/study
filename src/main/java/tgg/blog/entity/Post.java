@@ -47,8 +47,4 @@ public class Post {
     public void updateViewCount(){
         view++;
     }
-
-    public void minusViewCount(){
-        view--;
-    }
 }
