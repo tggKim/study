@@ -22,7 +22,7 @@ public class PostService {
     }
 
     public Post findById(Long id){
-        return postRepository.findOne(id).orElseThrow(()->new IllegalArgumentException("값이 null 이다"));
+        return postRepository.findById(id).orElseThrow(()->new IllegalArgumentException("값이 null 이다"));
     }
 
     public List<Post> findAllPost(){
@@ -37,6 +37,18 @@ public class PostService {
 
     @Transactional
     public void removePost(Long id){
-        postRepository.remove(id);
+        postRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void updateViewCount(Long id){
+        Post post = postRepository.findById(id).orElseThrow(()->new IllegalArgumentException("값이 null 이다"));
+        post.updateViewCount();
+    }
+
+    @Transactional
+    public void minusViewCount(Long id){
+        Post post = postRepository.findById(id).orElseThrow(()->new IllegalArgumentException("값이 null 이다"));
+        post.minusViewCount();
     }
 }

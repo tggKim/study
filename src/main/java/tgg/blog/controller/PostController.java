@@ -1,6 +1,9 @@
 package tgg.blog.controller;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +38,37 @@ public class PostController {
 
     //Post에 대한 상세 정보
     @GetMapping("/blog/post/{id}")
-    public String post(@PathVariable("id") Long id,Model model){
+    public String post(@PathVariable("id") Long id, Model model, HttpServletRequest request, HttpServletResponse response){
+        Cookie oldCookie=null;
+        Cookie[] cookies = request.getCookies();
+        if(cookies!=null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals("postView")){
+                    oldCookie=cookie;
+                }
+            }
+        }
+
+        if(oldCookie!=null){
+            if(!oldCookie.getValue().contains("["+id+"]")){
+                postService.updateViewCount(id);
+                oldCookie.setValue(oldCookie.getValue()+"_["+id+"]");
+                oldCookie.setPath("/");
+                oldCookie.setMaxAge(60*60*24);
+                response.addCookie(oldCookie);
+            }
+        }
+        else{
+            postService.updateViewCount(id);
+            Cookie newCookie = new Cookie("postView","["+id+"]");
+            newCookie.setPath("/");
+            newCookie.setMaxAge(60*60*24);
+            response.addCookie(newCookie);
+        }
+
         Post findPost = postService.findById(id);
+
+
         ResponsePost post = new ResponsePost(findPost);
         model.addAttribute("post",post);
         model.addAttribute("comments",findPost.getComments());
@@ -79,17 +111,4 @@ public class PostController {
         return "redirect:/blog/post/"+id;
     }
 
-    @PostConstruct
-    public void method(){
-        Post post1 = new Post();
-        post1.setTitle("kim1");
-        post1.setContent("hello");
-
-        Post post2 = new Post();
-        post2.setTitle("kim2");
-        post2.setContent("bye");
-
-        postService.savePost(post1);
-        postService.savePost(post2);
-    }
 }

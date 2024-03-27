@@ -27,6 +27,9 @@ public class Post {
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @Column(columnDefinition = "integer default 0",nullable=false)
+    private int view;
+
     @PrePersist
     public void prePersist() {
         LocalDateTime now = LocalDateTime.now();
@@ -34,14 +37,18 @@ public class Post {
         updatedDate = now;
     }
 
-    @PreUpdate
-    public void preUpdate() {
+    public void update(String title,String content){
+        this.title=title;
+        this.content=content;
         LocalDateTime now = LocalDateTime.now();
         updatedDate = now;
     }
 
-    public void update(String title,String content){
-        this.title=title;
-        this.content=content;
+    public void updateViewCount(){
+        view++;
+    }
+
+    public void minusViewCount(){
+        view--;
     }
 }

@@ -13,11 +13,13 @@ public class ResponseListPost {
     private String title;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
+    private int view;
 
     public ResponseListPost(Post post) {
         this.id=post.getId();
         this.title = post.getTitle();
         this.createdDate = post.getCreatedDate();
         this.updatedDate = post.getUpdatedDate();
+        this.view = post.getView();
     }
 }
