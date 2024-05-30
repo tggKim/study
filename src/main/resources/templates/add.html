@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>post</title>
+    <style>
+        html, body, form{
+            height: 100%;
+        }
+        body{
+            height: 75%;
+        }
+        h1, h3{
+            text-align: center;
+        }
+        input[type="text"] {
+            display: block;
+            margin: 0 auto;
+            width: 350px; /* 필요에 따라 너비 조정 */
+        }
+        textarea{
+            display: block;
+            margin: 0 auto;
+            width: 90%;
+            height: 90%;
+        }
+        .center{
+            text-align: center;
+        }
+        .field-error{
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+<h1>Post</h1>
+<hr>
+<form action="/blog/post" method="POST" th:object="${addPost}">
+    <h3>제목</h3>
+    <input type="text" placeholder="제목 입력하시오" name="title" th:value="${addPost.title}" th:errorClass="field-error" >
+    <div class="center" th:errors="*{title}" style="color:#dc3545">
+        제목 오류
+    </div>
+    <h3>내용</h3>
+    <textarea placeholder="내용 입력하시오" name="content" th:text="${addPost.content}" th:errorClass="field-error" ></textarea>
+    <div class="center" th:errors="*{content}" style="color:#dc3545">
+        내용 오류
+    </div>
+    <br>
+    <div class="center">
+        <input type="submit" value="등록">
+        <input type="button" th:onclick="|location.href='@{/blog}'|" value="취소">
+    </div>
+</form>
+</body>
+</html>

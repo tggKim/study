@@ -49,7 +49,7 @@
         <textarea th:text="${post.content}" readonly></textarea>
         <br>
         <div>
-            <input type="button" th:onclick="|location.href='@{/blog/post?id={id}(id=${post.id})}'|" value="수정">
+            <input type="button" th:onclick="|location.href='@{/blog/update/{postId}(postId=${post.id})}'|" value="수정">
             <input type="button" value="삭제" id="deleteButton">
             <input type="button" th:onclick="|location.href='@{/blog}'|" value="취소">
         </div>

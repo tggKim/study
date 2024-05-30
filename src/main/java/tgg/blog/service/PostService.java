@@ -4,7 +4,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tgg.blog.dto.RequestPost;
+import tgg.blog.dto.RequestUpdatePost;
 import tgg.blog.entity.Post;
 import tgg.blog.repository.PostRepository;
 
@@ -30,9 +30,9 @@ public class PostService {
     }
 
     @Transactional
-    public void updatePost(RequestPost requestPost){
-        Post post = findById(requestPost.getId());
-        post.update(requestPost.getTitle(),requestPost.getContent());
+    public void updatePost(RequestUpdatePost requestUpdatePost){
+        Post post = findById(requestUpdatePost.getId());
+        post.update(requestUpdatePost.getTitle(),requestUpdatePost.getContent());
     }
 
     @Transactional
