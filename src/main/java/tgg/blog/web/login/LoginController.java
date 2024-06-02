@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import tgg.blog.domain.login.LoginService;
 import tgg.blog.domain.member.Member;
 import tgg.blog.domain.member.dto.RequestMember;
@@ -27,7 +28,9 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@Validated @ModelAttribute RequestLogin requestLogin, BindingResult bindingResult, HttpServletRequest request){
+    public String login(@Validated @ModelAttribute RequestLogin requestLogin, BindingResult bindingResult
+                        ,@RequestParam(value = "redirectURL",defaultValue = "/") String redirectURL
+                        ,HttpServletRequest request){
         if(bindingResult.hasErrors()){
             return "login/loginPage";
         }
@@ -40,7 +43,7 @@ public class LoginController {
 
         HttpSession session = request.getSession();
         session.setAttribute("login",member);
-        return "redirect:/";
+        return "redirect:"+redirectURL;
     }
 
     @GetMapping("/logout")
