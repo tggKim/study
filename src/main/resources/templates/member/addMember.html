@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>first page</title>
+        <style>
+            body{
+                 text-align: center;
+             }
+             body{
+                 height: 75%;
+             }
+             h1, h3{
+                 text-align: center;
+             }
+            .field-error{
+                border-color: #dc3545;
+                color: #dc3545;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Sign Up</h1>
+        <hr>
+        <br>
+            <form action="" th:action th:object="${requestMember}" method="post">
+                <div>
+                    <label for="loginId">로그인 ID</label>
+                    <input type="text" id="loginId" th:field="*{loginId}" th:errorclass="field-error">
+                    <div class="center" th:errors="*{loginId}" style="color:#dc3545">
+                        ID
+                    </div>
+                </div>
+                <div>
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" th:field="*{password}" th:errorclass="field-error">
+                    <div class="center" th:errors="*{password}" style="color:#dc3545">
+                        비밀번호
+                    </div>
+                </div>
+                <div>
+                    <label for="name">이름</label>
+                    <input type="text" id="name" th:field="*{name}" th:errorclass="field-error">
+                    <div class="center" th:errors="*{name}" style="color:#dc3545">
+                        이름
+                    </div>
+                </div>
+                <div class="center">
+                    <button type="submit">회원 가입</button>
+                    <button th:onclick="|location.href='@{/}'|" type="button">취소</button>
+                </div>
+            </form>
+    </body>
+</html>

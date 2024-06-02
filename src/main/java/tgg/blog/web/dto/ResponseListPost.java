@@ -1,8 +1,8 @@
-package tgg.blog.dto;
+package tgg.blog.web.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import tgg.blog.entity.Post;
+import tgg.blog.domain.post.Post;
 
 import java.time.LocalDateTime;
 

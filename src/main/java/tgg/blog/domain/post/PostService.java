@@ -1,12 +1,9 @@
-package tgg.blog.service;
+package tgg.blog.domain.post;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tgg.blog.dto.RequestUpdatePost;
-import tgg.blog.entity.Post;
-import tgg.blog.repository.PostRepository;
+import tgg.blog.web.dto.RequestUpdatePost;
 
 import java.util.List;
 

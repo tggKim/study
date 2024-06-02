@@ -1,12 +1,12 @@
-package tgg.blog.controller;
+package tgg.blog.web.comment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import tgg.blog.dto.RequestComment;
-import tgg.blog.service.CommentService;
+import tgg.blog.web.dto.RequestComment;
+import tgg.blog.domain.comment.CommentService;
 
 @Controller
 @RequiredArgsConstructor

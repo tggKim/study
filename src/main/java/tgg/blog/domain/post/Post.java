@@ -1,11 +1,9 @@
-package tgg.blog.entity;
+package tgg.blog.domain.post;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tgg.blog.domain.comment.Comment;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

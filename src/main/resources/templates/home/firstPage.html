@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>first page</title>
+        <style>
+           body{
+                text-align: center;
+            }
+            body{
+                height: 75%;
+            }
+            h1, h3{
+                text-align: center;
+            }
+            input[type="button"]{
+                width: 200px;
+                height: 50px;
+                font-size: 18px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>welcome!</h1>
+        <hr>
+        <br>
+        <input type="button" th:onclick="|location.href='@{/login}'|" value="로그인">
+        <input type="button" th:onclick="|location.href='@{/members/add}'|" value="회원가입">
+    </body>
+</html>

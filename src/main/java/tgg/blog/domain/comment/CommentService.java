@@ -1,13 +1,11 @@
-package tgg.blog.service;
+package tgg.blog.domain.comment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tgg.blog.dto.RequestComment;
-import tgg.blog.entity.Comment;
-import tgg.blog.entity.Post;
-import tgg.blog.repository.CommentRepository;
-import tgg.blog.repository.PostRepository;
+import tgg.blog.domain.post.PostService;
+import tgg.blog.web.dto.RequestComment;
+import tgg.blog.domain.post.Post;
 
 @Service
 @RequiredArgsConstructor

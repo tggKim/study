@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>first page</title>
+    <style>
+        body{
+             text-align: center;
+         }
+         body{
+             height: 75%;
+         }
+         h1, h4{
+             text-align: center;
+         }
+         input[type="button"]{
+             width: 200px;
+             height: 50px;
+             font-size: 18px;
+         }
+    </style>
+</head>
+<body>
+<h1>welcome!</h1>
+<hr>
+<br>
+<h4 class="mb-3" th:text="|로그인: ${member.name}|">로그인 사용자 이름</h4>
+<input type="button" th:onclick="|location.href='@{/blog}'|" value="블로그 이동">
+<input type="button" th:onclick="|location.href='@{/logout}'|" value="로그 아웃">
+</body>
+</html>

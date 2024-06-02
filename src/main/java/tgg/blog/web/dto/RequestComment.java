@@ -1,8 +1,8 @@
-package tgg.blog.dto;
+package tgg.blog.web.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import tgg.blog.entity.Comment;
+import tgg.blog.domain.comment.Comment;
 
 @Getter @Setter
 public class RequestComment {

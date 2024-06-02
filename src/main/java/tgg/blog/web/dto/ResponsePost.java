@@ -1,9 +1,9 @@
-package tgg.blog.dto;
+package tgg.blog.web.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tgg.blog.entity.Post;
+import tgg.blog.domain.post.Post;
 
 
 // "/blog/post/{id}" 응답에 사용하는 객체 id,title,content에 대한 정보 가지는 dto

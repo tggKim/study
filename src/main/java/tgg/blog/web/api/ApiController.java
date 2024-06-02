@@ -1,11 +1,8 @@
-package tgg.blog.controller;
+package tgg.blog.web.api;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import tgg.blog.entity.Comment;
-import tgg.blog.service.CommentService;
-import tgg.blog.service.PostService;
+import tgg.blog.domain.post.PostService;
 
 @RestController
 @RequiredArgsConstructor

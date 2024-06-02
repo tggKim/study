@@ -1,8 +1,9 @@
-package tgg.blog.entity;
+package tgg.blog.domain.comment;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import tgg.blog.domain.post.Post;
 
 import java.time.LocalDateTime;
 

@@ -1,25 +1,18 @@
-package tgg.blog.dto;
+package tgg.blog.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tgg.blog.entity.Post;
 
 @NoArgsConstructor
 @Getter @Setter
-public class RequestAddPost {
-
+public class RequestUpdatePost {
+    @NotNull(message="id가 null이면 안됩니다")
+    private Long id;
     @NotBlank(message="제목을 입력해주세요")
     private String title;
     @NotBlank(message="내용을 입력해주세요")
     private String content;
-
-    public Post toPost(){
-        Post post = new Post();
-        post.setTitle(this.title);
-        post.setContent(this.content);
-        return post;
-    }
 }

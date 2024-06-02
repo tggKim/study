@@ -1,9 +1,7 @@
-package tgg.blog.controller;
+package tgg.blog.web.post;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -11,11 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tgg.blog.dto.*;
-import tgg.blog.entity.Comment;
-import tgg.blog.entity.Post;
-import tgg.blog.service.CommentService;
-import tgg.blog.service.PostService;
+import tgg.blog.domain.post.Post;
+import tgg.blog.domain.comment.CommentService;
+import tgg.blog.domain.post.PostService;
+import tgg.blog.web.dto.RequestAddPost;
+import tgg.blog.web.dto.RequestUpdatePost;
+import tgg.blog.web.dto.ResponseListPost;
+import tgg.blog.web.dto.ResponsePost;
 
 import java.util.List;
 
@@ -39,36 +39,49 @@ public class PostController {
 
     //Post에 대한 상세 정보
     @GetMapping("/blog/post/{id}")
-    public String post(@PathVariable("id") Long id, Model model, HttpServletRequest request, HttpServletResponse response){
-        Cookie oldCookie=null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies!=null){
-            for(Cookie cookie : cookies){
-                if(cookie.getName().equals("postView")){
-                    oldCookie=cookie;
-                }
-            }
-        }
+    public String post(@PathVariable("id") Long id, Model model, HttpServletRequest request){
+//        Cookie oldCookie=null;
+//        Cookie[] cookies = request.getCookies();
+//        if(cookies!=null){
+//            for(Cookie cookie : cookies){
+//                if(cookie.getName().equals("postView")){
+//                    oldCookie=cookie;
+//                }
+//            }
+//        }
+//
+//        if(oldCookie!=null){
+//            if(!oldCookie.getValue().contains("["+id+"]")){
+//                postService.updateViewCount(id);
+//                oldCookie.setValue(oldCookie.getValue()+"_["+id+"]");
+//                oldCookie.setPath("/");
+//                oldCookie.setMaxAge(60*60*24);
+//                response.addCookie(oldCookie);
+//            }
+//        }
+//        else{
+//            postService.updateViewCount(id);
+//            Cookie newCookie = new Cookie("postView","["+id+"]");
+//            newCookie.setPath("/");
+//            newCookie.setMaxAge(60*60*24);
+//            response.addCookie(newCookie);
+//        }
 
-        if(oldCookie!=null){
-            if(!oldCookie.getValue().contains("["+id+"]")){
-                postService.updateViewCount(id);
-                oldCookie.setValue(oldCookie.getValue()+"_["+id+"]");
-                oldCookie.setPath("/");
-                oldCookie.setMaxAge(60*60*24);
-                response.addCookie(oldCookie);
-            }
+        HttpSession session = request.getSession(false);
+        if(session==null){
+            session = request.getSession();
+            session.setAttribute(String.valueOf(id),id);
+            postService.updateViewCount(id);
         }
         else{
-            postService.updateViewCount(id);
-            Cookie newCookie = new Cookie("postView","["+id+"]");
-            newCookie.setPath("/");
-            newCookie.setMaxAge(60*60*24);
-            response.addCookie(newCookie);
+            Long findId = (Long)session.getAttribute(String.valueOf(id));
+            if(findId==null){
+                session.setAttribute(String.valueOf(id),id);
+                postService.updateViewCount(id);
+            }
         }
 
         Post findPost = postService.findById(id);
-
 
         ResponsePost post = new ResponsePost(findPost);
         model.addAttribute("post",post);
@@ -104,7 +117,7 @@ public class PostController {
     }
 
     @PostMapping("/blog/update/{id}")
-    public String updatePost(@Validated @ModelAttribute("updatePost") RequestUpdatePost requestUpdatePost,BindingResult bindingResult){
+    public String updatePost(@Validated @ModelAttribute("updatePost") RequestUpdatePost requestUpdatePost, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             log.info("에러 = {}",bindingResult);
             return "update";
